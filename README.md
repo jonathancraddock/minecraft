@@ -85,7 +85,7 @@ For ref:
 * https://www.oracle.com/java/technologies/downloads/#java16  
 * https://www.digitalocean.com/community/tutorials/how-to-create-a-minecraft-server-on-ubuntu-20-04  
 
-"Exit" from minecraft user and remove incorrect version of Java and reinstall.
+"Exit" from minecraft user, and remove incorrect version of Java and reinstall.
 
 ```bash
 exit
@@ -94,7 +94,7 @@ whoami
 sudo apt remove --auto-remove openjdk*
 sudo apt purge openjdk*
 
-sudo apt install openjdk-16-jre-headless
+sudo apt install openjdk-17-jre-headless
 java -version
 ```
 
@@ -103,7 +103,77 @@ Switch back to minecraft user account.
 ```bash
 sudo su minecraft
 cd ~/server
-``
+java -Xms1024M -Xmx1024M -jar server.jar nogui
+```
+
+Note the EULA warning message.
+
+```bash
+nano ~/server/eula.txt
+```
+
+Set the value `eula=true`.
+
+Edit the properties.
+
+```bash
+nano ~/server/server.properties
+```
+
+Set an rcon password, and adjust any other parameters as needed. (Consider firewall, if you want access from outside your LAN.)
+
+```bash
+rcon.port=25575
+rcon.password=XXXXXXXXXXXX
+enable-rcon=true
+```
+
+"Exit" back to admin account, and config systemd.
+
+```bash
+sudo nano /etc/systemd/system/minecraft.service
+```
+
+> If you wanted to adjust the defauts, you can query your min/max heap size as follows:
+> `java -XX:+PrintCommandLineFlags -version`
+
+Suggested config, and use mcrcon password that was set earlier.
+
+```bash
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+User=minecraft
+Nice=1
+KillMode=none
+SuccessExitStatus=0 1
+ProtectHome=true
+ProtectSystem=full
+PrivateDevices=true
+NoNewPrivileges=true
+WorkingDirectory=/opt/minecraft/server
+ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar server.jar nogui
+ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p XXXXXXXXXXXX stop
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
