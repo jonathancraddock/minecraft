@@ -42,6 +42,8 @@ Java runtime.
 
 !!!! ***DO NOT USE THIS VERSION*** !!!!
 
+> Should have used used v17, with `sudo apt install openjdk-17-jre-headless`. Additional notes below.
+
 ```bash
 sudo apt install openjdk-11-jre-headless
 java -version
@@ -79,11 +81,7 @@ cd ~/server
 java -Xmx1024M -Xms1024M -jar server.jar nogui
 ```
 
-> At this point, appears Java runtime version is not correct... :-/
-
-For ref:  
-* https://www.oracle.com/java/technologies/downloads/#java16  
-* https://www.digitalocean.com/community/tutorials/how-to-create-a-minecraft-server-on-ubuntu-20-04  
+> At this point, appears Java runtime version is not correct... should have used v17. :-/
 
 "Exit" from minecraft user, and remove incorrect version of Java and reinstall.
 
@@ -181,11 +179,19 @@ Server is working and can connect OK from my PC. Taking another snapshot here.
 
 -----
 
+Connect to console:
 
+```bash
+/opt/minecraft/tools/mcrcon/mcrcon -H 192.168.1.XXX -P 25575 -p XXXXXXXXXXXX -t
+```
 
+-----
 
+### Additional Reference
 
+If you don't want fire spread: `/gamerule doFireTick false`
 
+For commands and syntax help -> https://minecraft.fandom.com/wiki/Commands#Command_guide
 
 
 
