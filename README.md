@@ -31,3 +31,50 @@ sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
 Taking a snapshot here.
 
 -----
+
+Install git.
+
+```bash
+sudo apt install git build-essential
+```
+
+Java runtime.
+
+```bash
+sudo apt install openjdk-11-jre-headless
+java -version
+```
+
+Create a minecraft user and setup folders.
+
+```bash
+sudo useradd -r -m -U -d /opt/minecraft -s /bin/bash minecraft
+sudo su minecraft
+cd ~
+mkdir -p ~/{backups,tools,server}
+```
+
+Install mcrcon.
+
+```bash
+git clone https://github.com/Tiiffi/mcrcon.git ~/tools/mcrcon
+cd ~/tools/mcrcon
+gcc -std=gnu11 -pedantic -Wall -Wextra -O2 -s -o mcrcon mcrcon.c
+./mcrcon -v
+```
+
+-----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
