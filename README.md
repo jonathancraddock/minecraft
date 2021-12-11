@@ -161,8 +161,25 @@ ExecStop=/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p XXXXXXXXXXX
 WantedBy=multi-user.target
 ```
 
+Reload and start the service.
 
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start minecraft
 
+sudo systemctl status minecraft
+```
+^- *first run takes a while... in this case, 83 seconds!*
+
+Enable service.
+
+```bash
+sudo systemctl enable minecraft
+```
+
+Server is working and can connect OK from my PC. Taking another snapshot here.
+
+-----
 
 
 
