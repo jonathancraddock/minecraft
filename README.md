@@ -40,6 +40,8 @@ sudo apt install git build-essential
 
 Java runtime.
 
+!!!! ***DO NOT USE THIS VERSION*** !!!!
+
 ```bash
 sudo apt install openjdk-11-jre-headless
 java -version
@@ -67,11 +69,41 @@ Taking a second snapshot here.
 
 -----
 
+Minecraft Server -> https://www.minecraft.net/en-us/download/server
 
+Download.
 
+```bash
+wget https://launcher.mojang.com/v1/objects/125e5adf40c659fd3bce3e66e67a16bb49ecc1b9/server.jar -P ~/server
+cd ~/server
+java -Xmx1024M -Xms1024M -jar server.jar nogui
+```
 
+> At this point, appears Java runtime version is not correct... :-/
 
+For ref:  
+* https://www.oracle.com/java/technologies/downloads/#java16  
+* https://www.digitalocean.com/community/tutorials/how-to-create-a-minecraft-server-on-ubuntu-20-04  
 
+"Exit" from minecraft user and remove incorrect version of Java and reinstall.
+
+```bash
+exit
+whoami
+
+sudo apt remove --auto-remove openjdk*
+sudo apt purge openjdk*
+
+sudo apt install openjdk-16-jre-headless
+java -version
+```
+
+Switch back to minecraft user account.
+
+```bash
+sudo su minecraft
+cd ~/server
+``
 
 
 
