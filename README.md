@@ -193,7 +193,7 @@ If you don't want fire spread: `/gamerule doFireTick false`
 
 For commands and syntax help -> https://minecraft.fandom.com/wiki/Commands#Command_guide
 
-
+Guide (java version out of date, but otherwise very easy to follow) -> https://bobcares.com/blog/install-minecraft-server-on-ubuntu/
 
 
 
